@@ -339,3 +339,8 @@ func (s *Server) RemoveUser(name string) error {
 	docID := "org.couchdb.user:" + name
 	return db.Delete(docID)
 }
+
+// SetAuthCookie updates the authentication header
+func (s *Server) SetAuthCookie(token string) {
+	s.resource.header.Set("Cookie", strings.Join([]string{"AuthSession", token}, "="))
+}
